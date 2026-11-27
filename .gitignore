@@ -1,0 +1,64 @@
+# Blueprint (local planning only — never push)
+blueprint.md
+
+# Real config / secrets (only *.example.toml are committed)
+config.toml
+hosts.toml
+secrets.toml
+*.env
+.env*
+.wardline-config/
+
+# Runtime data (repo root only — do not ignore src/wardline/{vault,reports,evidence})
+/vault/
+/evidence/
+/reports/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+/raw/
+**/raw/
+
+# Keys and SSH material
+*.pem
+*.key
+id_*
+known_hosts
+!known_hosts.example
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+dist/
+build/
+*.egg-info/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Tooling / editors
+.idea/
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+.DS_Store
+*.swp
+*~
+
+# Cursor / Claude local
+.cursor/
+.claude/
+
+# uv
+uv.lock.bak
+
+# Textual snapshot HTML report (local)
+snapshot_report.html

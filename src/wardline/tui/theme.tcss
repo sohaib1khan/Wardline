@@ -1,0 +1,369 @@
+/* Wardline TUI theme — security console, teal accent */
+
+Screen {
+    background: $surface;
+}
+
+#app-title {
+    dock: top;
+    height: 1;
+    content-align: center middle;
+    color: $accent;
+    text-style: bold;
+}
+
+Footer {
+    background: $panel;
+}
+
+/* Textual HelpPanel is a 33% split — never let it steal the canvas. */
+HelpPanel {
+    display: none !important;
+    width: 0 !important;
+    min-width: 0 !important;
+}
+
+/* Compact keys chip / cheat-sheet (see KeysRail widget). */
+KeysRail {
+    dock: right;
+}
+
+/* ── Header / palette icon ──────────────────────────────── */
+
+Header {
+    background: $panel;
+    color: $text;
+    text-style: bold;
+}
+
+HeaderIcon {
+    color: $accent;
+    text-style: bold;
+    width: 5;
+    content-align: center middle;
+}
+
+HeaderIcon:hover {
+    background: $accent 35%;
+    color: auto;
+    text-style: bold reverse;
+}
+
+HeaderClock {
+    color: $text-muted;
+}
+
+/* ── Splash ─────────────────────────────────────────────── */
+
+#splash {
+    align: center middle;
+    background: $surface;
+}
+
+#splash-logo {
+    width: auto;
+    height: auto;
+    color: $accent;
+    text-align: center;
+    text-style: bold;
+}
+
+#splash-tagline {
+    width: 100%;
+    text-align: center;
+    color: $text-muted;
+    margin-top: 1;
+}
+
+#splash-status {
+    width: 100%;
+    text-align: center;
+    color: $text-muted;
+    margin-top: 1;
+}
+
+#splash-bar {
+    width: 48;
+    margin-top: 1;
+    color: $accent;
+    text-align: center;
+}
+
+#posture-digits {
+    width: auto;
+    color: $accent;
+    text-style: bold;
+    margin: 0 0 1 0;
+}
+
+#score-meta {
+    color: $text-muted;
+}
+
+/* ── Dashboard ──────────────────────────────────────────── */
+
+#dash-root {
+    height: 1fr;
+    padding: 0 1;
+}
+
+#dash-brand {
+    height: auto;
+    margin: 0 0 1 0;
+    color: $accent;
+    text-style: bold;
+    text-align: center;
+}
+
+#dash-meta {
+    height: 1;
+    color: $text-muted;
+    text-align: center;
+    margin-bottom: 1;
+}
+
+.dash-panel {
+    height: auto;
+    border: tall $accent 40%;
+    padding: 0 1;
+    margin-bottom: 1;
+    background: $panel;
+}
+
+.dash-panel-title {
+    text-style: bold;
+    color: $accent;
+    margin-bottom: 0;
+}
+
+#dash-sys {
+    height: auto;
+}
+
+#dash-security {
+    height: auto;
+}
+
+#dash-posture {
+    height: auto;
+}
+
+#dash-severity {
+    height: auto;
+}
+
+#dash-fleet {
+    height: auto;
+    max-height: 8;
+}
+
+#dash-recent {
+    height: auto;
+    max-height: 10;
+}
+
+#dash-actions {
+    height: 3;
+    align: center middle;
+    margin-top: 1;
+}
+
+/* ── Bolder action buttons (high contrast in dark + light) ─
+   Use color: auto + !important so Textual defaults / theme vars
+   cannot leave white-on-light or accent-on-accent labels. */
+
+Button {
+    margin: 0 1;
+    min-width: 16;
+    height: 3;
+    border: tall $accent;
+    text-style: bold;
+    background: $panel !important;
+    color: auto !important;
+    tint: transparent !important;
+}
+
+Button:hover {
+    background: $boost !important;
+    color: auto !important;
+    border: tall $accent;
+    tint: transparent !important;
+}
+
+Button:focus {
+    background: $boost !important;
+    color: auto !important;
+    border: tall $secondary;
+    text-style: bold;
+    tint: transparent !important;
+}
+
+Button:disabled {
+    background: $panel !important;
+    color: $text-muted !important;
+    border: tall $primary 40%;
+    tint: transparent !important;
+}
+
+/* Filled primary — always contrast against accent fill */
+Button.-primary,
+Button.-primary:hover,
+Button.-primary:focus,
+Button.-primary:focus:hover {
+    background: $accent !important;
+    color: auto !important;
+    border: tall $accent;
+    text-style: bold;
+    tint: transparent !important;
+}
+
+Button.-primary:hover,
+Button.-primary:focus:hover {
+    background: $secondary !important;
+    color: auto !important;
+    border: tall $secondary;
+}
+
+/* Error / warning variants (delete, etc.) */
+Button.-error,
+Button.-error:focus,
+Button.-error:hover {
+    background: $error !important;
+    color: auto !important;
+    border: tall $error;
+    tint: transparent !important;
+}
+
+Button.-warning,
+Button.-warning:focus,
+Button.-warning:hover {
+    background: $warning !important;
+    color: auto !important;
+    border: tall $warning;
+    tint: transparent !important;
+}
+
+/* ── Help ───────────────────────────────────────────────── */
+
+#help-root {
+    height: 1fr;
+    padding: 1 2;
+}
+
+#help-title {
+    text-style: bold;
+    color: $accent;
+    margin-bottom: 1;
+}
+
+#help-body {
+    height: 1fr;
+    border: tall $accent 40%;
+    padding: 1 2;
+    background: $panel;
+}
+
+#help-text {
+    width: 100%;
+}
+
+/* ── Shared screen chrome ───────────────────────────────── */
+
+#hosts-title,
+#findings-title,
+#vault-title,
+#evidence-title,
+#launcher-title,
+#ports-title {
+    text-style: bold;
+    color: $accent;
+    margin: 1 1 0 1;
+}
+
+/* ── Settings ───────────────────────────────────────────── */
+
+#settings-body {
+    padding: 0 1 1 1;
+}
+
+#settings-title {
+    text-style: bold;
+    color: $accent;
+    margin: 1 0 0 0;
+}
+
+#settings-subtitle {
+    color: $text-muted;
+    margin: 0 0 1 0;
+}
+
+.settings-panel {
+    height: auto;
+    border: tall $accent 40%;
+    background: $panel;
+    padding: 0 1 1 1;
+    margin-bottom: 1;
+}
+
+.settings-panel-title {
+    text-style: bold;
+    color: $accent;
+    margin: 0 0 1 0;
+}
+
+.settings-panel Label {
+    margin: 1 0 0 0;
+    color: $text-muted;
+}
+
+.settings-panel Input {
+    margin: 0 0 0 0;
+    width: 100%;
+}
+
+.settings-panel Checkbox {
+    margin: 1 0 0 0;
+}
+
+.settings-panel RadioSet {
+    height: auto;
+    margin: 0 0 0 0;
+    layout: horizontal;
+}
+
+#set-paths {
+    height: auto;
+    margin: 0 0 1 0;
+}
+
+#settings-actions {
+    height: auto;
+    margin: 0 0 1 0;
+    align: left middle;
+}
+
+#dash-storage,
+#dash-ssh {
+    height: auto;
+}
+
+#live-progress {
+    height: auto;
+    color: $accent;
+    text-style: bold;
+    margin-bottom: 0;
+}
+
+#live-bar {
+    width: 100%;
+    margin: 0 0 1 0;
+}
+
+#vault-paths {
+    height: auto;
+    margin-bottom: 1;
+}
+
+DataTable {
+    height: 1fr;
+}

@@ -1,0 +1,57 @@
+# Blueprint
+blueprint.md
+
+# Git / CI
+.git
+.github
+.gitignore
+.pre-commit-config.yaml
+.gitleaks.toml
+
+# Real config / secrets
+config.toml
+hosts.toml
+secrets.toml
+*.env
+.env*
+
+# Runtime data
+vault/
+evidence/
+reports/
+*.db
+*.sqlite
+*.sqlite3
+*.log
+raw/
+
+# Keys
+*.pem
+*.key
+id_*
+known_hosts
+
+# Python / tooling
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.mypy_cache/
+dist/
+build/
+*.egg-info/
+.coverage
+htmlcov/
+.idea/
+.vscode/
+.DS_Store
+.cursor/
+.claude/
+tests/
+docs/
+*.md
+!README.md
+!SECURITY.md
+!LICENSE

@@ -1,0 +1,6 @@
+Warning: The SSH configuration option 'PermitRootLogin' has not been set
+Warning: The file properties have changed:
+         File: /usr/bin/sudo
+Warning: Hidden file found: /usr: .hiddenbin
+[ Rootkit Hunter version 1.4.6 ]
+Invalid WEB_CMD configuration option. Possible rootkit, or a web mirror issue on Debian/Ubuntu.

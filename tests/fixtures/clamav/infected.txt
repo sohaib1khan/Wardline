@@ -1,0 +1,2 @@
+/home/alice/Downloads/eicar.com: Win.Test.EICAR_HDB-1 FOUND
+/var/www/html/upload/payload.exe: Win.Malware.Trojan-1 FOUND

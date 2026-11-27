@@ -1,0 +1,2 @@
+[WARNING]: This release is more than 4 months old.
+  Consider upgrading to the latest version from the CISOfy website or repository.

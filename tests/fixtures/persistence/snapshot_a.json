@@ -1,0 +1,7 @@
+{
+  "cron_system": ["/etc/cron.d/sysstat"],
+  "timers": ["logrotate.timer", "apt-daily.timer"],
+  "authorized_keys": {"alice": ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDemoKeyFixtureOnlyNotReal alice@lab01.example.internal"]},
+  "uid0_users": ["root"],
+  "users": ["root", "alice", "bob"]
+}

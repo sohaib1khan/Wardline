@@ -1,0 +1,12 @@
+# Lynis report data (sanitized fixture) — not from a real host
+hostid=lab01.example.internal
+hostname=lab01.example.internal
+os=Debian
+os_full_name=Debian GNU/Linux
+hardening_index=64
+warning[]=SSH-7408|SSH PermitRootLogin is not set to 'no'|solution=set PermitRootLogin no in sshd_config
+warning[]=FILE-6310|tmp directory sticky bit missing|/tmp
+suggestion[]=AUTH-9282|Use a password strength tool|install libpam-pwquality
+suggestion[]=PKGS-7392|Check package audit tooling|install apt-listbugs
+suggestion[]=BOOT-5122|Consider grub password
+lynis_version=3.1.1

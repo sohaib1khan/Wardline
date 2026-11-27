@@ -1,0 +1,30 @@
+# Example remote hosts inventory. Copy to your config dir:
+#   ~/.config/wardline/hosts.toml
+# Never commit a real hosts.toml.
+#
+# IPs below are from RFC 5737 documentation ranges only.
+
+# Max concurrent SSH scans for `wardline scan --backend ssh --all-hosts`
+fleet_concurrency = 4
+
+[[hosts]]
+name = "lab01"
+alias = "lab01.example.internal"
+# Documentation IP (TEST-NET-1)
+host = "192.0.2.10"
+user = "wardline"
+# Path relative to config dir, or absolute. Key must never be committed.
+identity_file = "keys/lab01_ed25519"
+port = 22
+# Optional labels for fleet filtering
+tags = ["lab", "rocky"]
+
+[[hosts]]
+name = "web-staging"
+alias = "web-staging.example.com"
+# Documentation IP (TEST-NET-2)
+host = "198.51.100.20"
+user = "wardline"
+identity_file = "keys/web_staging_ed25519"
+port = 22
+tags = ["staging", "ubuntu"]

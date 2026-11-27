@@ -1,0 +1,44 @@
+# Example Wardline config. Copy to your config dir and edit:
+#   ~/.config/wardline/config.toml   (normal user)
+#   /etc/wardline/config.toml        (root)
+# Or set WARDLINE_CONFIG_DIR.
+#
+# Never commit a real config.toml. Values below are documentation placeholders only.
+
+[general]
+default_profile = "quick"
+default_backend = "local"
+
+[ui]
+theme = "dark"
+reduce_motion = false
+
+[scan.clamav]
+paths = ["/home", "/var/www", "/tmp"]
+min_ram_mb = 4096
+
+[scan.nmap]
+# Only these targets may be scanned without a per-run confirmation.
+# Always keep 127.0.0.1. Use documentation IPs in examples.
+allowed_targets = ["127.0.0.1"]
+
+[scan.ss]
+expected_listeners = ["22/tcp", "80/tcp", "443/tcp"]
+
+[scan.false_positives]
+chkrootkit = ["/usr/lib/python3/dist-packages/fail2ban/tests/"]
+
+[vault]
+auto_save = true
+keep_last_n = 0          # 0 = keep all
+
+[evidence]
+enabled = false
+max_file_mb = 50
+max_total_mb = 1024
+
+[alerts]
+min_severity = "high"
+syslog = true
+# Webhook URL itself is never stored here — set this env var (or a secrets file).
+webhook_env = "WARDLINE_WEBHOOK_URL"

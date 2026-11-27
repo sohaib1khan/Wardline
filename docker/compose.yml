@@ -1,0 +1,27 @@
+# Optional compose helper for the Wardline scanner sidecar.
+# Prefer `wardline docker up|down` which applies the same settings.
+
+services:
+  scanner:
+    image: wardline-scanner:local
+    container_name: wardline-scanner
+    network_mode: host
+    pid: host
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_RAW
+      - DAC_READ_SEARCH
+    volumes:
+      - /:/host:ro
+      - wardline-trivy:/var/lib/trivy
+      - wardline-clamav:/var/lib/clamav
+    command: ["sleep", "infinity"]
+    restart: unless-stopped
+
+volumes:
+  wardline-trivy:
+  wardline-clamav:

@@ -1,0 +1,12 @@
+{
+  "cron_system": ["/etc/cron.d/sysstat", "/etc/cron.d/evil"],
+  "timers": ["logrotate.timer", "apt-daily.timer", "evil.timer"],
+  "authorized_keys": {
+    "alice": [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDemoKeyFixtureOnlyNotReal alice@lab01.example.internal",
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINewUnauthorizedKeyFixture attacker@evil.example.com"
+    ]
+  },
+  "uid0_users": ["root", "toor"],
+  "users": ["root", "alice", "bob", "svc-backdoor"]
+}

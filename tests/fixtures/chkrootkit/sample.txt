@@ -1,0 +1,4 @@
+Checking `bindshell'...                                           INFECTED
+Checking `lkm'...                                                 not infected
+/usr/lib/python3/dist-packages/fail2ban/tests/files/config/apache-auth/raw/.htaccess
+/tmp/.hidden_suspicious

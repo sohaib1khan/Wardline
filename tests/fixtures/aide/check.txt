@@ -1,0 +1,29 @@
+AIDE found differences between database and filesystem!!
+Start timestamp: 2024-06-01 12:00:01
+
+Summary:
+  Total number of entries:	1000
+  Added entries:		2
+  Removed entries:		1
+  Changed entries:		3
+
+---------------------------------------------------
+Added entries:
+---------------------------------------------------
+
+f++++++++++++++++: /usr/bin/.evil
+f++++++++++++++++: /home/alice/newfile.txt
+
+---------------------------------------------------
+Removed entries:
+---------------------------------------------------
+
+f----------------: /usr/bin/oldtool
+
+---------------------------------------------------
+Changed entries:
+---------------------------------------------------
+
+f   >.... mc..H..: /usr/bin/sudo
+f   >.... mc..H..: /etc/passwd
+f   >.... mc..H..: /etc/hosts

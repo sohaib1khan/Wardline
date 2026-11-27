@@ -1,0 +1,119 @@
+[project]
+name = "wardline"
+version = "0.1.0"
+description = "All-in-one Linux security scanning TUI that unifies open-source scanners into one finding format and Vault."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+authors = [{ name = "Sohaib Khan", email = "sohaib1khan@users.noreply.github.com" }]
+keywords = ["security", "scanning", "tui", "lynis", "trivy", "linux"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Security",
+]
+dependencies = [
+    "textual>=1.0.0",
+    "rich>=13.0.0",
+    "typer>=0.15.0",
+    "pydantic>=2.0.0",
+    "tomli-w>=1.0.0",
+    "jinja2>=3.1.0",
+    "asyncssh>=2.14.0",
+    "python-ulid>=2.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.9.0",
+    "pyright>=1.1.390",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-textual-snapshot>=1.0.0",
+    "pre-commit>=4.0.0",
+    "pip-audit>=2.7.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sohaib1khan/Wardline"
+Repository = "https://github.com/sohaib1khan/Wardline"
+Issues = "https://github.com/sohaib1khan/Wardline/issues"
+
+[project.scripts]
+wardline = "wardline.cli.app:app"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/wardline"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/wardline/reports/templates" = "wardline/reports/templates"
+"src/wardline/tui/theme.tcss" = "wardline/tui/theme.tcss"
+
+[tool.uv]
+package = true
+default-groups = ["dev"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific
+]
+ignore = [
+    "E501",  # line length handled by formatter
+    "B008",  # typer/click Option() in defaults is idiomatic
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["wardline"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pyright]
+include = ["src"]
+exclude = ["**/__pycache__", ".venv"]
+pythonVersion = "3.12"
+typeCheckingMode = "standard"
+venvPath = "."
+venv = ".venv"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+markers = [
+    "integration: slower tests that may need system tools",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.0",
+    "pyright>=1.1.390",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-textual-snapshot>=1.0.0",
+    "pre-commit>=4.0.0",
+    "pip-audit>=2.7.0",
+]

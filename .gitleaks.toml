@@ -1,0 +1,19 @@
+# Gitleaks configuration for Wardline.
+# Extends defaults; adds project-specific allowlists for fixtures/examples.
+
+title = "Wardline"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Wardline docs, examples, and sanitized fixtures"
+paths = [
+    '''config\.example\.toml$''',
+    '''hosts\.example\.toml$''',
+    '''CHANGELOG\.md$''',
+    '''README\.md$''',
+    '''SECURITY\.md$''',
+    '''LICENSE$''',
+    '''tests/fixtures/''',
+]

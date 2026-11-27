@@ -1,0 +1,3 @@
+S.5....T.  c /etc/hosts
+S.5....T.    /usr/bin/sudo
+..5....T.  c /etc/issue

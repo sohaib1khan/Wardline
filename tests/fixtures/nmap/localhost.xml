@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nmaprun>
+<nmaprun scanner="nmap" args="nmap -sV --script vulners -oX - 127.0.0.1" start="1717243200" version="7.94">
+<host>
+<address addr="127.0.0.1" addrtype="ipv4"/>
+<hostnames><hostname name="localhost" type="PTR"/></hostnames>
+<ports>
+<port protocol="tcp" portid="22">
+  <state state="open" reason="syn-ack"/>
+  <service name="ssh" product="OpenSSH" version="9.2p1" method="probed" conf="10"/>
+  <script id="vulners" output="&#xa;  cpe:/a:openbsd:openssh:9.2p1:&#xa;      CVE-2024-6387 8.1 https://vulners.com/cve/CVE-2024-6387&#xa;">
+    <table key="cpe:/a:openbsd:openssh:9.2p1">
+      <table>
+        <elem key="id">CVE-2024-6387</elem>
+        <elem key="cvss">8.1</elem>
+        <elem key="is_exploit">false</elem>
+        <elem key="type">cve</elem>
+      </table>
+    </table>
+  </script>
+</port>
+<port protocol="tcp" portid="80">
+  <state state="open" reason="syn-ack"/>
+  <service name="http" product="nginx" version="1.22.1" method="probed" conf="10"/>
+</port>
+</ports>
+</host>
+</nmaprun>

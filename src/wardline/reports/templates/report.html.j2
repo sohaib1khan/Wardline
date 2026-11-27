@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Wardline — {{ scan.host.hostname }} — {{ scan.id }}</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #0f1419;
+  --fg: #e7ecf1;
+  --muted: #8b9aab;
+  --card: #1a222c;
+  --accent: #2dd4bf;
+  --crit: #f87171;
+  --high: #fb923c;
+  --med: #fbbf24;
+  --low: #94a3b8;
+  --info: #64748b;
+  --border: #2a3542;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f7fb;
+    --fg: #0f172a;
+    --muted: #64748b;
+    --card: #ffffff;
+    --border: #dbe3ec;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.45;
+}
+header {
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(120deg, rgba(45,212,191,0.12), transparent 55%);
+}
+header .brand {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+h1 { margin: 0.35rem 0 0.25rem; font-size: 1.6rem; }
+.meta { color: var(--muted); font-size: 0.95rem; }
+main { padding: 1.25rem 1.75rem 3rem; max-width: 1100px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin: 1rem 0 1.5rem; }
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.9rem 1rem;
+}
+.stat .label { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.stat .value { font-size: 1.6rem; font-weight: 700; margin-top: 0.2rem; }
+table { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+th, td { text-align: left; padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+th { color: var(--muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }
+tr:last-child td { border-bottom: none; }
+.chip {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.chip.critical { background: color-mix(in srgb, var(--crit) 25%, transparent); color: var(--crit); }
+.chip.high { background: color-mix(in srgb, var(--high) 25%, transparent); color: var(--high); }
+.chip.medium { background: color-mix(in srgb, var(--med) 25%, transparent); color: var(--med); }
+.chip.low { background: color-mix(in srgb, var(--low) 25%, transparent); color: var(--low); }
+.chip.info { background: color-mix(in srgb, var(--info) 25%, transparent); color: var(--info); }
+details.finding {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: 0.6rem 0;
+  padding: 0.55rem 0.85rem;
+}
+details.finding summary { cursor: pointer; font-weight: 600; }
+.evidence {
+  margin-top: 0.55rem;
+  padding: 0.65rem;
+  background: color-mix(in srgb, var(--bg) 70%, black);
+  border-radius: 8px;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.muted { color: var(--muted); }
+.trend { display: flex; gap: 0.35rem; align-items: flex-end; height: 48px; margin: 0.5rem 0 1rem; }
+.trend span {
+  display: inline-block;
+  width: 10px;
+  background: var(--accent);
+  border-radius: 3px 3px 0 0;
+  opacity: 0.85;
+}
+footer { color: var(--muted); font-size: 0.8rem; padding: 0 1.75rem 2rem; }
+code { font-family: var(--mono); font-size: 0.9em; }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">WARDLINE</div>
+  <h1>{{ scan.host.hostname }}</h1>
+  <div class="meta">
+    Scan <code>{{ scan.id }}</code> · {{ scan.profile }} · {{ scan.backend.value }}
+    · {{ scan.started_at }}
+  </div>
+</header>
+<main>
+  <div class="grid">
+    <div class="stat"><div class="label">Posture</div><div class="value">{{ scan.scores.posture }}</div></div>
+    {% if scan.scores.lynis_hardening_index is not none %}
+    <div class="stat"><div class="label">Lynis</div><div class="value">{{ scan.scores.lynis_hardening_index }}</div></div>
+    {% endif %}
+    <div class="stat"><div class="label">Critical</div><div class="value">{{ scan.summary.by_severity.critical }}</div></div>
+    <div class="stat"><div class="label">High</div><div class="value">{{ scan.summary.by_severity.high }}</div></div>
+    <div class="stat"><div class="label">Medium</div><div class="value">{{ scan.summary.by_severity.medium }}</div></div>
+  </div>
+
+  {% if trend %}
+  <h2>Trend</h2>
+  <div class="trend" title="Recent posture scores">
+    {% for score in trend %}
+    <span style="height: {{ (score / 100 * 48) | round(0, 'floor') | int }}px" title="{{ score }}"></span>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <h2>Plugins</h2>
+  <table>
+    <thead><tr><th>Plugin</th><th>Status</th><th>Duration</th><th>Exit</th><th>Notes</th></tr></thead>
+    <tbody>
+    {% for pr in scan.plugin_results %}
+      <tr>
+        <td>{{ pr.plugin }}</td>
+        <td>{{ pr.status.value }}</td>
+        <td>{% if pr.duration_seconds is not none %}{{ '%.1f'|format(pr.duration_seconds) }}s{% else %}—{% endif %}</td>
+        <td>{{ pr.exit_code if pr.exit_code is not none else '—' }}</td>
+        <td class="muted">{{ pr.skip_reason or '' }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>Findings</h2>
+  {% if not findings %}
+    <p class="muted">No findings.</p>
+  {% else %}
+    {% for finding in findings %}
+    <details class="finding">
+      <summary>
+        <span class="chip {{ finding.severity.value }}">{{ finding.severity.value }}</span>
+        {{ finding.title }}
+        <span class="muted"> · {{ finding.plugin }} / {{ finding.rule_id }}</span>
+      </summary>
+      <p>{{ finding.description }}</p>
+      <p class="muted">Location: <code>{{ finding.location }}</code>
+        {% if finding.cve_ids %} · CVEs: {{ finding.cve_ids | join(', ') }}{% endif %}
+        {% if finding.verdict.value != 'none' %} · Verdict: {{ finding.verdict.value }}{% endif %}
+      </p>
+      {% if finding.verdict.value != 'none' and finding.verdict_reason %}
+      <p class="muted">Verdict reason: {{ finding.verdict_reason }}</p>
+      {% endif %}
+      {% if finding.related %}
+      <p class="muted">Related: {% for rid in finding.related %}<code>{{ rid }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+      {% endif %}
+      {% if finding.fix_hint %}<p><strong>Fix hint:</strong> {{ finding.fix_hint }}</p>{% endif %}
+      {% if finding.evidence %}<div class="evidence">{{ finding.evidence }}</div>{% endif %}
+    </details>
+    {% endfor %}
+  {% endif %}
+</main>
+<footer>Generated by Wardline {{ scan.wardline_version }} · offline self-contained report</footer>
+</body>
+</html>

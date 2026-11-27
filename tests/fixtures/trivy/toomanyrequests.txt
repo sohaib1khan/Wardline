@@ -1,0 +1,1 @@
+2024-06-01T12:00:00Z    FATAL   Unable to initialize the local DB: failed to download vulnerability DB: OCI repository error: GET https://ghcr.io/v2/aquasecurity/trivy-db/manifests/2: TOOMANYREQUESTS: retry-after: 60.00s

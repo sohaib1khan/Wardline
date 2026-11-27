@@ -1,0 +1,2 @@
+FEDORA-EPEL-2024-abc123 security Critical/Sec. sudo-1.9.15-1.el9.x86_64
+FEDORA-EPEL-2024-def456 security Important/Sec. openssl-3.0.7-27.el9.x86_64
